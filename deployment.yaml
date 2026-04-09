@@ -15,7 +15,7 @@ spec:
       containers:
       - name: rivera-container
         image: rivera-app:latest
-        imagePullPolicy: IfNotPresent  # Uses local image if available
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
 ---
@@ -24,10 +24,11 @@ kind: Service
 metadata:
   name: rivera-service
 spec:
-  type: NodePort  # Exposes the app outside the cluster
+  type: NodePort
   selector:
     app: rivera
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30080  # You can access it at http://<Node-IP>:30080
+      nodePort: 30008
+
